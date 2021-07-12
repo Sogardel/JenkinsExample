@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -30,18 +31,20 @@ public class BaseTest {
 	@Parameters({"url"})
 	@BeforeClass
 	public void setup(String url) throws IOException {
-		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
+		//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized"); // open Browser in maximized mode
-		options.addArguments("disable-infobars"); // disabling infobars
-		options.addArguments("--disable-extensions"); // disabling extensions
-		options.addArguments("--disable-gpu"); // applicable to windows os only
-		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-		options.addArguments("--no-sandbox"); // Bypass OS security model
+		//options.addArguments("disable-infobars"); // disabling infobars
+		//options.addArguments("--disable-extensions"); // disabling extensions
+		options.addArguments("--headless"); // applicable to windows os only
+		//options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+	//	options.addArguments("--no-sandbox"); // Bypass OS security model
 		driver = new ChromeDriver(options);
 		//driver = new ChromeDriver();
 		//maximize the window
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
+		driver.manage().window().setSize(new Dimension(1440, 900));
+
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);	
 		driver.get(url);
 
