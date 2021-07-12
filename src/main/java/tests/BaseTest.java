@@ -29,7 +29,7 @@ public class BaseTest {
 	@Parameters({"url"})
 	@BeforeClass
 	public void setup(String url) throws IOException {
-		//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		driver = new FirefoxDriver();
 		//maximize the window
 		driver.manage().window().maximize();
