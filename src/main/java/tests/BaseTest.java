@@ -30,7 +30,7 @@ public class BaseTest {
 	@BeforeClass
 	public void setup(String url) throws IOException {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		driver = new FirefoxDriver();
+		driver = new ChromeDriver();
 		//maximize the window
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);	
