@@ -8,6 +8,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -30,7 +31,15 @@ public class BaseTest {
 	@BeforeClass
 	public void setup(String url) throws IOException {
 		System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
-		driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("start-maximized"); // open Browser in maximized mode
+		options.addArguments("disable-infobars"); // disabling infobars
+		options.addArguments("--disable-extensions"); // disabling extensions
+		options.addArguments("--disable-gpu"); // applicable to windows os only
+		options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+		options.addArguments("--no-sandbox"); // Bypass OS security model
+		driver = new ChromeDriver(options);
+		//driver = new ChromeDriver();
 		//maximize the window
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);	
