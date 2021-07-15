@@ -2,6 +2,7 @@ package tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Dimension;
@@ -11,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -27,6 +29,8 @@ public class BaseTest {
 	
 	WebDriver driver;
 	public HomePage homePage;
+	String browser = System.getProperty("browser");
+
 
 	@Parameters({"url"})
 	@BeforeClass
@@ -34,15 +38,31 @@ public class BaseTest {
 		//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized"); // open Browser in maximized mode
-		//options.addArguments("disable-infobars"); // disabling infobars
-		//options.addArguments("--disable-extensions"); // disabling extensions
-		options.addArguments("--headless"); // applicable to windows os only
-		//options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-	//	options.addArguments("--no-sandbox"); // Bypass OS security model
-		driver = new ChromeDriver(options);
-		//driver = new ChromeDriver();
-		//maximize the window
+		//options.addArguments("--headless"); // applicable to windows os only
+		//driver = new ChromeDriver(options);
 		//driver.manage().window().maximize();
+		
+		
+		if(browser != "" & browser != null ) {
+			if(browser.equalsIgnoreCase("chrome")) {
+				driver = new ChromeDriver(options);
+				driver.manage().window().maximize();
+			}
+			else if(browser.equalsIgnoreCase("Firefox")) {
+				driver = new FirefoxDriver();
+				driver.manage().window().maximize();
+
+			}
+			
+		}
+		else {
+
+			driver = new ChromeDriver(options);
+			driver.manage().window().maximize();
+		}
+		
+		
+		
 		driver.manage().window().setSize(new Dimension(1440, 900));
 
 		driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);	
