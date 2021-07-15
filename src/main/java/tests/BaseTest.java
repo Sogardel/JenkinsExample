@@ -11,6 +11,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -42,9 +43,10 @@ public class BaseTest {
 		options.addArguments("--headless"); // applicable to windows os only
 		//driver = new ChromeDriver(options);
 		//driver.manage().window().maximize();
-		FirefoxOptions Firefoxoptions = new FirefoxOptions();
-		options.setHeadless(true);  // <-- headless set here
-		
+	    FirefoxBinary firefoxBinary = new FirefoxBinary();
+	    firefoxBinary.addCommandLineOptions("--headless");
+	    FirefoxOptions firefoxOptions = new FirefoxOptions();
+	    firefoxOptions.setBinary(firefoxBinary);
 		
 		if(browser != "" & browser != null ) {
 			if(browser.equalsIgnoreCase("chrome")) {
@@ -52,7 +54,7 @@ public class BaseTest {
 				driver.manage().window().maximize();
 			}
 			else if(browser.equalsIgnoreCase("Firefox")) {
-				driver = new FirefoxDriver(Firefoxoptions);
+				driver = new FirefoxDriver(firefoxOptions);
 				driver.manage().window().maximize();
 
 			}
