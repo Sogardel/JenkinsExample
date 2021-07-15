@@ -38,7 +38,7 @@ public class BaseTest {
 		//System.setProperty("webdriver.chrome.driver", "drivers/chromedriver");
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("start-maximized"); // open Browser in maximized mode
-		//options.addArguments("--headless"); // applicable to windows os only
+		options.addArguments("--headless"); // applicable to windows os only
 		//driver = new ChromeDriver(options);
 		//driver.manage().window().maximize();
 		
