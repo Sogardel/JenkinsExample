@@ -12,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -41,6 +42,8 @@ public class BaseTest {
 		options.addArguments("--headless"); // applicable to windows os only
 		//driver = new ChromeDriver(options);
 		//driver.manage().window().maximize();
+		FirefoxOptions Firefoxoptions = new FirefoxOptions();
+		options.setHeadless(true);  // <-- headless set here
 		
 		
 		if(browser != "" & browser != null ) {
@@ -49,7 +52,7 @@ public class BaseTest {
 				driver.manage().window().maximize();
 			}
 			else if(browser.equalsIgnoreCase("Firefox")) {
-				driver = new FirefoxDriver();
+				driver = new FirefoxDriver(Firefoxoptions);
 				driver.manage().window().maximize();
 
 			}
